@@ -1,0 +1,35 @@
+﻿@model Article
+
+@{
+    var authors = (IList<Person>)ViewBag.Authors;
+}
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<div class="mb-3">
+    <label asp-for="Title" class="form-label"></label>
+    <input asp-for="Title" class="form-control">
+    <span asp-validation-for="Title"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Description" class="form-label"></label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Content" class="form-label"></label>
+    <textarea asp-for="Content" class="form-control"></textarea>
+    <span asp-validation-for="Content"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="AuthorId">Author</label>
+    <select asp-for="AuthorId">
+        <option value="">Please select...</option>
+        @foreach (var author in authors.OrderBy(a => a.FirstName).ThenBy(a => a.LastName))
+        {
+            <option value="@author.Id">@author.FirstName @author.LastName</option>
+        }
+    </select>
+    <span asp-validation-for="AuthorId"></span>
+</div>

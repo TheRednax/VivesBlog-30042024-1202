@@ -1,0 +1,22 @@
+﻿@model IList<Article>
+
+@{
+    ViewData["Title"] = "Home Page";
+    var featuredArticle = Model.FirstOrDefault();
+}
+
+@if (featuredArticle is not null)
+{
+    <div class="text-center">
+        <h1 class="display-4">Featured</h1>
+        <partial name="ArticlePartial" model="featuredArticle"/>
+    </div>
+}
+
+<div>
+    <h1>Articles</h1>
+    @foreach (var article in Model)
+    {
+        <partial name="ArticlePartial" model="article"/>
+    }
+</div>
